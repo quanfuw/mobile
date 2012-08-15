@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Session2Phi</string>
+    <string name="hello_world">Hello World, from Phi!</string>
+    <string name="title_activity_main">Session 2 Phi</string>
+    <color name="background_main">#ffaa99</color>
+    <color name="main_title">#123</color>
+    <dimen name="main_title">14pt</dimen>
+
+</resources>
