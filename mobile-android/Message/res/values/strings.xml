@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="write_text">Write something…</string>
+    <string name="send_button_text">Send</string>
+    <string name="app_name">Send Message</string>
+    <string name="title_activity_write">Write something</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_display">DisplayActivity</string>
+
+</resources>
