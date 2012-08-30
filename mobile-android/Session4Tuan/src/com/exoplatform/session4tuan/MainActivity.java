@@ -20,6 +20,11 @@ public class MainActivity extends Activity {
 	Button startBnt ;
 	EditText text1 ;
 	Button downloadBnt ;
+	
+	public static final String KEY_URL     = "URL";
+	public static final String KEY_STATUS  = "DOWNLOAD_STATUS";
+	public static final String KEY_FILE_LOCATION = "FILE_LOCATION";
+	public static final String KEY_MESSENGER = "MESSENGER";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,20 +33,23 @@ public class MainActivity extends Activity {
         startBnt = (Button) findViewById(R.id.button1) ;
         downloadBnt = (Button) findViewById(R.id.button2) ;
         text1 = (EditText) findViewById(R.id.editText1) ;
-        text1.setText("http://www.vogella.com/index.html") ;
+        text1.setText("http://2.bp.blogspot.com/-_6agVqVYcDk/Try-zzbd-GI/AAAAAAAAAWE/TIgX6oe8lyw/s1600/android_42.png") ;
         startBnt.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				
+				
 				Intent service = new Intent(getBaseContext(), MyService.class) ;
 				if(MyService.isInstanceCreated()) { 
 					stopService(service) ;
 					//if(!isMyServiceRunning("com.exoplatform.session4tua.MyService"))
-					Toast.makeText(getBaseContext(), "Service is already running, we will stop", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getBaseContext(), "Service is already running, we will stop...", Toast.LENGTH_SHORT).show();
 				}else {
-					startService(service) ;
+					
 					//if(isMyServiceRunning("com.exoplatform.session4tua.MyService"))
-				    Toast.makeText(getBaseContext(), "Service stoped and restart", Toast.LENGTH_SHORT).show();
+				    Toast.makeText(getBaseContext(), "Service starting....", Toast.LENGTH_SHORT).show();
+				    startService(service) ;
 				}
 				 
 				 
@@ -68,6 +76,7 @@ public class MainActivity extends Activity {
     }
     
     private Handler handler = new Handler() {
+    	@Override
         public void handleMessage(Message message) {
           Object path = message.obj;
           if (message.arg1 == RESULT_OK && path != null) {
@@ -86,10 +95,11 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, DownloadService.class);
         // Create a new Messenger for the communication back
         Messenger messenger = new Messenger(handler);
-        intent.putExtra("MESSENGER", messenger);
+        intent.putExtra(KEY_MESSENGER, messenger);
+        
         //EditText text = (EditText)findViewById(R.id.editText1) ;
         intent.setData(Uri.parse(text1.getText().toString()));
-        intent.putExtra("urlpath", text1.getText().toString());
+        intent.putExtra(KEY_URL, text1.getText().toString());
         if(!isMyServiceRunning("com.exoplatform.session4tuan.DownloadService"))
         startService(intent);
         else {

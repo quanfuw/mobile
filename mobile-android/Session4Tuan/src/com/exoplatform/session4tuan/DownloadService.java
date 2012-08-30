@@ -1,12 +1,13 @@
 package com.exoplatform.session4tuan;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.util.Log;
 public class DownloadService extends IntentService {
 
   private int result = Activity.RESULT_CANCELED;
+  private static MyService instance = null;
 
   public DownloadService() {
     super("DownloadService");
@@ -29,7 +31,7 @@ public class DownloadService extends IntentService {
   @Override
   protected void onHandleIntent(Intent intent) {
     Uri data = intent.getData();
-    String urlPath = intent.getStringExtra("urlpath");
+    String urlPath = intent.getStringExtra(MainActivity.KEY_URL);
     String fileName = data.getLastPathSegment();
     File output = new File(Environment.getExternalStorageDirectory(),
         fileName);
@@ -37,19 +39,23 @@ public class DownloadService extends IntentService {
       output.delete();
     }
 
-    InputStream stream = null;
-    FileOutputStream fos = null;
+    BufferedInputStream stream = null;
+    BufferedOutputStream fos = null;
     try {
 
       URL url = new URL(urlPath);
-      stream = url.openConnection().getInputStream();
-      InputStreamReader reader = new InputStreamReader(stream);
-      fos = new FileOutputStream(output.getPath());
-      int next = -1;
-      while ((next = reader.read()) != -1) {
-        fos.write(next);
+      stream = new BufferedInputStream(url.openStream());
+      //InputStreamReader reader = new InputStreamReader(stream);
+      fos = new BufferedOutputStream(new FileOutputStream(output.getPath()));
+      
+      
+      byte bdata[] = new byte[1024];
+      int count;
+      while ((count = stream.read(bdata)) != -1) {
+          fos.write(bdata, 0, count);
       }
-      // Sucessful finished
+      
+      
       result = Activity.RESULT_OK;
 
     } catch (Exception e) {
@@ -73,16 +79,34 @@ public class DownloadService extends IntentService {
 
     Bundle extras = intent.getExtras();
     if (extras != null) {
-      Messenger messenger = (Messenger) extras.get("MESSENGER");
+      Messenger messenger = (Messenger) extras.get(MainActivity.KEY_MESSENGER);
       Message msg = Message.obtain();
       msg.arg1 = result;
       msg.obj = output.getAbsolutePath();
       try {
         messenger.send(msg);
+        Intent downloadStatus = new Intent(getBaseContext(), MyReceiver.class);
+	    downloadStatus.putExtra(MainActivity.KEY_STATUS, result);
+	    downloadStatus.putExtra(MainActivity.KEY_FILE_LOCATION, output.getAbsolutePath());
+	    // BroadCast event
+	    sendBroadcast(downloadStatus);
+	    
       } catch (android.os.RemoteException e1) {
-        Log.w(getClass().getName(), "Exception sending message", e1);
+        Log.e(getClass().getName(), "Exception sending message", e1);
+        e1.printStackTrace();
+      } finally {
+    	  
+    	  this.stopSelf() ;
       }
 
     }
   }
+
+public static MyService getInstance() {
+	return instance;
+}
+
+public static void setInstance(MyService instance) {
+	DownloadService.instance = instance;
+}
 } 
