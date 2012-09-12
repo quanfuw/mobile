@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">SQLiteApplication</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">SQLite</string>
+    <string name="label_enter_keyword">Type a word</string>
+    <string name="title_add_word_activity">Add Word</string>
+    <string name="label_add_word">Add Word</string>
+    <string name="label_enter_word">Type a word</string>
+    <string name="label_enter_desc">Type the description of this word</string>
+    <string name="label_search_word">Search:</string>
+    <string name="label_search_result">Words:</string>
+    <string name="label_OK">OK</string>
+    <string name="label_show_word">Word:</string>
+    <string name="label_show_def">Def:</string>
+    <string name="title_show_word_activity">Show Word</string>
+
+</resources>
