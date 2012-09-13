@@ -11,6 +11,22 @@ public class Book {
 	private String preFaceUrl;
 	
 	
+	public Book() {
+		
+		
+	}
+	
+	public Book(String id, String name, String title, String category, String author, int page, String preFaceUrl) {
+		
+		this.id = id;
+		this.name = name ;
+		this.title = title; 
+		this.category = category;
+		this.author = author;
+		this.pages = page ;
+		this.preFaceUrl = preFaceUrl;
+	}
+	
 	public String getId() {
 		return id;
 	}
