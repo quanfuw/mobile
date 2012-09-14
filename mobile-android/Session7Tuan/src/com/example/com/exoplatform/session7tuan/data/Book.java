@@ -1,6 +1,9 @@
 package com.example.com.exoplatform.session7tuan.data;
 
-public class Book {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Book implements Parcelable {
 
 	private String id;
 	private String name;
@@ -16,6 +19,12 @@ public class Book {
 		
 	}
 	
+	public Book(String name, String author) {
+		
+		this.name = name ;
+		this.author = author;
+	}
+	
 	public Book(String id, String name, String title, String category, String author, int page, String preFaceUrl) {
 		
 		this.id = id;
@@ -27,6 +36,21 @@ public class Book {
 		this.preFaceUrl = preFaceUrl;
 	}
 	
+	public Book(Parcel source) {
+		id = source.readString();
+		name = source.readString();
+		title = source.readString();
+		category = source.readString();
+		author = source.readString();
+		pages = source.readInt();
+		preFaceUrl = source.readString();
+		
+		
+		 
+	}
+
+
+
 	public String getId() {
 		return id;
 	}
@@ -68,6 +92,45 @@ public class Book {
 	}
 	public void setPreFaceUrl(String preFaceUrl) {
 		this.preFaceUrl = preFaceUrl;
+	}
+
+	
+	
+	public static final Creator<Book> CREATOR = new Creator<Book>() {
+
+		@Override
+		public Book createFromParcel(Parcel source) {
+			// TODO Auto-generated method stub
+			return new Book(source);
+		}
+
+		@Override
+		public Book[] newArray(int size) {
+			// TODO Auto-generated method stub
+			return new  Book[size]; 
+		}
+		
+		
+	}; 
+	
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id) ;
+		dest.writeString(name) ;
+		dest.writeString(title) ;
+		dest.writeString(author) ;
+		dest.writeString(category) ;
+		dest.writeInt(pages) ;
+		dest.writeString(preFaceUrl);
+		
+		
+		
 	}
 	
 	

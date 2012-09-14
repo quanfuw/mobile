@@ -11,13 +11,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
-public class BookAdapter  extends BaseAdapter {
+public class BookDetailAdapter  extends BaseAdapter {
 
-	private List<Book> data_ ;
+	private List<String> data_ ;
 	
 	Context currentContext_ ;
 	
-	public BookAdapter(Context currentContext, List<Book> data) {
+	public BookDetailAdapter(Context currentContext, List<String> data) {
 		currentContext_ = currentContext ;
 		data_ = data ;
 		
@@ -43,7 +43,7 @@ public class BookAdapter  extends BaseAdapter {
 	@Override
 	public View getView(int position, View currentContext, ViewGroup arg2) {
 		TextView display = new TextView(currentContext_) ;
-		display.setText(data_.get(position).getName()) ;
+		display.setText(data_.get(position)) ;
 		return display;
 	}
 
