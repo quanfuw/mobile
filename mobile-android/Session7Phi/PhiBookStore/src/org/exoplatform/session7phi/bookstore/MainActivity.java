@@ -5,7 +5,6 @@ import org.exoplatform.session7phi.bookstore.BookStoreDBHelper.Book;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -49,11 +48,5 @@ public class MainActivity extends Activity {
     public void startAddBookActivity(View view) {
     	Intent addBookActivity = new Intent(this, AddBookActivity.class);
     	startActivity(addBookActivity);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
     }
 }

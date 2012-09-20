@@ -4,9 +4,6 @@ import org.exoplatform.session7phi.bookstore.BookStoreDBHelper.Book;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 public class ViewBookDetailsActivity extends Activity {
@@ -23,22 +20,4 @@ public class ViewBookDetailsActivity extends Activity {
         ((TextView)findViewById(R.id.display_book_author)).setText(book.getAuthor());
         ((TextView)findViewById(R.id.display_book_price)).setText(book.getPrice());
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_view_book_details, menu);
-        return true;
-    }
-
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }
