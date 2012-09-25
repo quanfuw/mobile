@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>MAY102</Machine>
+    <WindowsUser>tuanp</WindowsUser>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <RegisteredManifestChecksum>CFDEBD4256CFBFE2C6D1BDB040FB688C84651ED9CDA290F19E101C5157AB3205</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>70cc8bc1-69a8-456d-8b0f-fb96ced35647_1.0.0.0_neutral__4n60srsq76yw0</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>70cc8bc1-69a8-456d-8b0f-fb96ced35647_4n60srsq76yw0!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>70cc8bc1-69a8-456d-8b0f-fb96ced35647</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=tuanp</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-09-25T16:39:04.655</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\default.html">
+      <PackagePath>default.html</PackagePath>
+      <Modified>2012-09-25T16:38:54.795</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\images\logo.png">
+      <PackagePath>images\logo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-08-29T07:29:14.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\images\smalllogo.png">
+      <PackagePath>images\smalllogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-08-29T07:29:14.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\images\splashscreen.png">
+      <PackagePath>images\splashscreen.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-08-29T07:29:14.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\images\storelogo.png">
+      <PackagePath>images\storelogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-08-29T07:29:14.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\js\default.js">
+      <PackagePath>js\default.js</PackagePath>
+      <Modified>2012-08-29T04:28:52.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\css\default.css">
+      <PackagePath>css\default.css</PackagePath>
+      <Modified>2012-08-29T07:29:12.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\java\git\mobile\mobile-windows\winRT\session1\session1\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2012-09-25T16:39:02.885</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResolvedSDKReference Include="C:\Program Files\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.WinJS.1.0\1.0\">
+      <Name>Microsoft.WinJS.1.0</Name>
+      <Version>1.0.9200.20498</Version>
+      <Architecture>Neutral</Architecture>
+      <FrameworkIdentity>Name=Microsoft.WinJS.1.0, MinVersion=1.0.9200.20498</FrameworkIdentity>
+      <AppxLocation>C:\Program Files\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.WinJS.1.0\1.0\Microsoft.WinJS.1.0.appx</AppxLocation>
+    </ResolvedSDKReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bin\Debug\resources.pri
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bin\Debug\AppxManifest.xml
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bin\Debug\session1.build.appxrecipe
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\priconfig.xml.intermediate
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\layout.resfiles.intermediate
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\resources.resfiles.intermediate
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\pri.resfiles.intermediate
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\priconfig.xml
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\layout.resfiles
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\resources.resfiles
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\pri.resfiles
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\LanguageQualifiers.txt
+C:\java\git\mobile\mobile-windows\winRT\session1\session1\bld\Debug\ProjectArchitectures.txt
