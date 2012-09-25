@@ -1,11 +1,13 @@
 package com.example.com.exoplatform.session7tuan.data;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+ 
 
 public class BookDataImpl extends SQLiteOpenHelper implements BookDataService{
 
@@ -41,6 +43,9 @@ public class BookDataImpl extends SQLiteOpenHelper implements BookDataService{
 	
 	@Override
 	public Book addBook(Book b) {
+		
+		if(!isExist(b.getName())){
+		
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -56,6 +61,10 @@ public class BookDataImpl extends SQLiteOpenHelper implements BookDataService{
 		db.close(); // Closing database connection
 		
 		return b;
+		} else {
+			System.out.println("Book Alredy exits!");
+			return null;
+		}
 	}
 
 	@Override
@@ -108,11 +117,34 @@ public class BookDataImpl extends SQLiteOpenHelper implements BookDataService{
 		return book;
 		 
 	}
+	
+	
+	
+	
 
 	@Override
 	public List<Book> getAllBook() {
+		List<Book> list = new ArrayList<Book>();
+		SQLiteDatabase data = this.getReadableDatabase() ;
+		Cursor c = data.query(TABLE_BOOK, new String[]{KEY_NAME, KEY_AUTHOR},null, null, null, null,null);
 		// TODO Auto-generated method stub
-		return null;
+		while(c.moveToNext()) {
+			list.add(new Book(c.getString(0), c.getString(1)));
+		}
+		c.close();
+		return list;
+	}
+
+	@Override
+	public boolean isExist(String bookName) {
+		 
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.query(TABLE_BOOK, new String[] { KEY_NAME,
+					KEY_NAME, KEY_TITLE, KEY_CATE, KEY_AUTHOR, KEY_PAGE_NUM, KEY_PRE_FACE }, KEY_ID + "=?",
+					new String[] { String.valueOf(bookName) }, null, null, null, null);
+			return ((cursor != null) && cursor.moveToFirst());
+		 
 	}
 
 }

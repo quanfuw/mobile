@@ -4,10 +4,10 @@
 
 
 # /
-/.settings
-/.project
-/.classpath
-/.idea
+.settings
+.project
+.classpath
+.idea
 /*.iml
 /*.ipr
 /*.iws
@@ -32,6 +32,7 @@
 *.ear
 *.sar
 *.class
+*.classes
 
 # Maven 
 target/

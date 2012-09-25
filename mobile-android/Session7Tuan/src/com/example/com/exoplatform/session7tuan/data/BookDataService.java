@@ -10,5 +10,7 @@ public interface BookDataService {
 	public int  deleteBook(String bookId);
 	public int  countBookData();
 	
+	public boolean isExist(String bookName);
+	
 
 }

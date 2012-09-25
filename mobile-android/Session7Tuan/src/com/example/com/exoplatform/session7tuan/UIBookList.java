@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.com.exoplatform.session7tuan.data.Book;
+import com.example.com.exoplatform.session7tuan.data.BookDataImpl;
+import com.example.com.exoplatform.session7tuan.data.BookDataService;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class UIBookList extends Activity {
 	
+	BookDataService bookService = new BookDataImpl(this) ;
 	ListView bookList ;
 	
 	EditText searchField ;
@@ -29,11 +32,12 @@ public class UIBookList extends Activity {
         setContentView(R.layout.activity_book_list);
         bookList = (ListView)findViewById(R.id.bookList) ;
         
-        data.add(new Book("the sign of forth", "Ser Conand")) ;
         
-        data.add(new Book("gone with the wind", "Heator")) ;
+        bookService.addBook(new Book("the sign of forth", "Ser Conand")) ;
+        
+        bookService.addBook(new Book("gone with the wind", "Heator")) ;
         //
-        bookList.setAdapter(new BookAdapter(this, data)) ;
+        bookList.setAdapter(new BookAdapter(this, bookService.getAllBook())) ;
         
         bookList.setOnItemClickListener(new OnItemClickListener() {
         	@Override
