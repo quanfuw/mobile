@@ -1,0 +1,6 @@
+C:\java\git\mobile\mobile-windows\c#\sesion1\sesion1\bin\Debug\sesion1.exe.config
+C:\java\git\mobile\mobile-windows\c#\sesion1\sesion1\obj\Debug\sesion1.csprojResolveAssemblyReference.cache
+C:\java\git\mobile\mobile-windows\c#\sesion1\sesion1\bin\Debug\sesion1.exe
+C:\java\git\mobile\mobile-windows\c#\sesion1\sesion1\bin\Debug\sesion1.pdb
+C:\java\git\mobile\mobile-windows\c#\sesion1\sesion1\obj\Debug\sesion1.exe
+C:\java\git\mobile\mobile-windows\c#\sesion1\sesion1\obj\Debug\sesion1.pdb
