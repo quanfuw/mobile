@@ -1,0 +1,19 @@
+<resources>
+
+    <string name="app_name">ImprovedBookstore</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_add_book">Add book</string>
+    <string name="hint_search_book">Search book</string>
+    <string name="title_activity_book_store_main">BookStoreMainActivity</string>
+    <string name="title_activity_view_book_details">ViewBookDetailsActivity</string>
+    <string name="title_activity_add_book">AddBookActivity</string>
+    <string name="title_activity_search_book">SearchBookActivity</string>
+    <string name="menu_search_book">Search book</string>
+    <string name="label_book_title">Title</string>
+    <string name="label_book_author">Author</string>
+    <string name="label_book_price">Price</string>
+    <string name="label_add_book">Add a new book</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="btn_label_add_book">Add</string>
+    <string name="label_search_no_results">No results found, please try again.</string>
+</resources>
