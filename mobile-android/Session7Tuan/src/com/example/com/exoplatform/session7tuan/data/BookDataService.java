@@ -11,6 +11,7 @@ public interface BookDataService {
 	public int  countBookData();
 	
 	public boolean isExist(String bookName);
+  public List<Book> searchBook(String key);
 	
 
 }

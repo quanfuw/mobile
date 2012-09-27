@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener; 
+import android.widget.Toast;
 
 public class UIBookList extends Activity {
 	
@@ -37,7 +38,8 @@ public class UIBookList extends Activity {
         
         bookService.addBook(new Book("gone with the wind", "Heator")) ;
         //
-        bookList.setAdapter(new BookAdapter(this, bookService.getAllBook())) ;
+        data = bookService.getAllBook();
+        bookList.setAdapter(new BookAdapter(this, data)) ;
         
         bookList.setOnItemClickListener(new OnItemClickListener() {
         	@Override
@@ -61,4 +63,23 @@ public class UIBookList extends Activity {
         getMenuInflater().inflate(R.menu.activity_book_list, menu);
         return true;
     }
+    
+    public void search(View v) {
+      EditText ed = (EditText)findViewById(R.id.searchField) ;
+      
+      if("".equals(ed.getText().toString().trim())) {
+        
+        data = bookService.getAllBook() ;
+      } else {
+        
+        data = bookService.searchBook(ed.getText().toString()) ;
+      }
+      
+      bookList.setAdapter(new BookAdapter(this, data)) ;
+      
+      
+      
+      
+    }
+     
 }

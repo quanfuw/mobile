@@ -140,11 +140,25 @@ public class BookDataImpl extends SQLiteOpenHelper implements BookDataService{
 		 
 			SQLiteDatabase db = this.getReadableDatabase();
 
-			Cursor cursor = db.query(TABLE_BOOK, new String[] { KEY_NAME,
-					KEY_NAME, KEY_TITLE, KEY_CATE, KEY_AUTHOR, KEY_PAGE_NUM, KEY_PRE_FACE }, KEY_ID + "=?",
+			Cursor cursor = db.query(TABLE_BOOK, new String[] { KEY_ID,
+					KEY_NAME, KEY_TITLE, KEY_CATE, KEY_AUTHOR, KEY_PAGE_NUM, KEY_PRE_FACE }, KEY_NAME + "=?",
 					new String[] { String.valueOf(bookName) }, null, null, null, null);
 			return ((cursor != null) && cursor.moveToFirst());
 		 
 	}
+
+  @Override
+  public List<Book> searchBook(String key) {
+    List<Book> list = new ArrayList<Book>();
+    SQLiteDatabase db = this.getReadableDatabase() ;
+    Cursor cursor = db.query(TABLE_BOOK, new String[] { KEY_ID,
+        KEY_NAME, KEY_TITLE, KEY_CATE, KEY_AUTHOR, KEY_PAGE_NUM, KEY_PRE_FACE }, KEY_NAME + " like? or " + KEY_AUTHOR + " like?" ,
+        new String[] { "%"+key+"%","%"+key+"%" }, null, null, null, null);
+    //System.out.println("query ----->>>" + db.);
+    while(cursor.moveToNext()) {
+      list.add(new Book(cursor.getString(1), cursor.getString(4))) ;
+    }
+    return list;
+  }
 
 }
