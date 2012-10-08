@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="app_name">com.example.session8tuan.BookReader</string>
+    <string name="hello_world">Book Setting</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_setting">Setting</string>
+    
+    
+    <string-array name="view_types">
+        <item>List view</item>
+        <item>Grid view</item>
+    </string-array>
+
+</resources>
