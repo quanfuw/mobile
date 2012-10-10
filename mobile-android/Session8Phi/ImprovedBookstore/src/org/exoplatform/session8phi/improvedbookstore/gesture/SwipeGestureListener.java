@@ -19,7 +19,7 @@ public class SwipeGestureListener extends SimpleOnGestureListener {
 	private int direction=0; // -1 is left to right // 1 is right to left
 	private boolean isAnimating=false;
 	private int totalSwipeDistance=0; // the distance of the swipe gesture
-	private static final int SWIPE_MIN_DISTANCE = 12; // threshold under which the animation does not start
+	private static final int SWIPE_MIN_DISTANCE = 50; // threshold under which the animation does not start
 	
 	public SwipeGestureListener() {
 		super();
@@ -27,28 +27,34 @@ public class SwipeGestureListener extends SimpleOnGestureListener {
 	
 	public SwipeGestureListener(SwipableView v) {
 		context = v.getContext();
-		scroll = new Scroller(context);
 		swipeView = v;
 		handler = new Handler();
+		scroll = new Scroller(context);
 	}
 	
 	private void animate(int animationDistance) {
 		isAnimating = true; // when true, no other animation can start
-		Log.d("EXO_TAG", "Animating on "+animationDistance+" px");
+		String dir = (direction==1) ? "left" : "right";
+		Log.d("EXO_TAG", "Moving "+dir+" on "+animationDistance+" px");
 		// start scrolling automatically
 		scroll.startScroll(lastX, 0, animationDistance, 0, 1000);
 		// the thread that will handle the animation
-		Runnable thread = new Runnable() {
+		// cf http://developer.android.com/guide/components/processes-and-threads.html#WorkerThreads
+		new Thread(new Runnable() {
 			public void run() {
 				// calculate new position
 				boolean more = scroll.computeScrollOffset();
 				int currX = scroll.getCurrX();
-				int diff = lastX - currX;
+				final int diff = lastX - currX;
 				// move subviews to new position
-				swipeView.getDetailsView().offsetLeftAndRight(diff);
-				swipeView.getFullDescView().offsetLeftAndRight(diff);
-				// redraw the UI
-				swipeView.invalidate();
+				swipeView.post(new Runnable() {
+					public void run() {
+						swipeView.getDetailsView().offsetLeftAndRight(diff);
+						swipeView.getFullDescView().offsetLeftAndRight(diff);
+						// redraw the UI
+						swipeView.invalidate();
+					}
+				});
 				if (more) { // animation is not yet finished
 					lastX = currX;
 					// call the thread after 16ms
@@ -63,9 +69,7 @@ public class SwipeGestureListener extends SimpleOnGestureListener {
 					Log.d("EXO_TAG", "* lastX:"+lastX+"\n* direction:"+direction);
 				}
 			}
-		};
-		// start the thread after 16ms
-		handler.postDelayed(thread, 16);
+		}).start();
 	}
 	
 	public boolean handleBackButtonPressed() {
@@ -98,8 +102,8 @@ public class SwipeGestureListener extends SimpleOnGestureListener {
 				int animationDistance = (swipeView.getDetailsView().getWidth()-totalSwipeDistance)*direction;
 				animate(animationDistance);
 			} else if (totalSwipeDistance>0) { // return to position before dragging
-				//direction = -direction;
 				int animationDistance = totalSwipeDistance*(-direction);
+				direction = -direction;
 				animate(animationDistance);
 			}
 		}

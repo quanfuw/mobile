@@ -144,8 +144,6 @@ public class BookStoreDBHelper extends SQLiteOpenHelper {
 					null, null, null);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (c != null) c.close();
 		}
 		return c;
 	}
