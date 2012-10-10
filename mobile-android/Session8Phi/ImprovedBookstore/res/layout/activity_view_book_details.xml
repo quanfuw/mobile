@@ -1,44 +1,77 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.exoplatform.session8phi.improvedbookstore.SwipableView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:id="@+id/main_detail_view">
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:contentDescription="@string/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+	    <ImageView
+	        android:id="@+id/imageView1"
+	        android:contentDescription="@string/app_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:src="@drawable/ic_launcher" />
+	
+	    <TextView
+	        android:id="@+id/display_book_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView1"
+	        android:layout_toRightOf="@+id/imageView1"
+	        android:text="title-holder"
+	        android:textSize="15pt"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	    <TextView
+	        android:id="@+id/display_book_author"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/display_book_title"
+	        android:layout_toRightOf="@+id/imageView1"
+	        android:text="author-holder"
+	        android:textStyle="italic"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/display_book_price"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/display_book_author"
+	        android:layout_toRightOf="@+id/imageView1"
+	        android:text="price-holder"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/display_book_desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/display_book_price"
+	        android:text="desc-holder" />
+	
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/display_book_desc"
+	        android:textStyle="italic"
+	        android:text="@string/message_view_more" />
+
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/display_book_title"
+        android:id="@+id/display_book_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="title-holder"
-        android:textSize="15pt"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="desc-holder" />
+    
+</org.exoplatform.session8phi.improvedbookstore.SwipableView>
 
-    <TextView
-        android:id="@+id/display_book_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/display_book_title"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="author-holder"
-        android:textStyle="italic"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/display_book_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/display_book_author"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="price-holder"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-</RelativeLayout>

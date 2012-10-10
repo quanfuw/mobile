@@ -2,15 +2,17 @@ package org.exoplatform.session8phi.improvedbookstore;
 
 import org.exoplatform.session8phi.improvedbookstore.BookStoreDBHelper.Book;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class BookStoreMainActivity extends ListActivity {
@@ -23,7 +25,19 @@ public class BookStoreMainActivity extends ListActivity {
         //setContentView(R.layout.activity_book_store_main);
         db = new BookStoreDBHelper(this);
         
-        Cursor c = db.getAllBooks();
+        populateList();
+        
+    }
+
+    @Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		populateList();
+	}
+    
+    private void populateList() {
+    	Cursor c = db.getAllBooks();
         String[] from = {
         		Book.BOOK_TITLE,
         		Book.BOOK_AUTHOR,
@@ -46,7 +60,7 @@ public class BookStoreMainActivity extends ListActivity {
         setListAdapter(adapter);
     }
 
-    @Override
+	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
     	String bookId = ((TextView)v.findViewById(R.id.text_book_item_id)).getText().toString();
 		Intent showBookActivity = new Intent(getBaseContext(), ViewBookDetailsActivity.class);
@@ -76,6 +90,23 @@ public class BookStoreMainActivity extends ListActivity {
 	            Intent searchIntent = new Intent(this, SearchBookActivity.class);
 	            startActivity(searchIntent);
 	            return true;
+	        case R.id.menu_exit:
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        	builder.setMessage(getString(R.string.menu_exit_app)+"?")
+	        	       .setCancelable(true)
+	        	       .setPositiveButton(getString(R.string.word_yes), new DialogInterface.OnClickListener() {
+	        	           public void onClick(DialogInterface dialog, int id) {
+	        	                finish();
+	        	           }
+	        	       })
+	        	       .setNegativeButton(getString(R.string.word_no), new DialogInterface.OnClickListener() {
+	        	           public void onClick(DialogInterface dialog, int id) {
+	        	                dialog.cancel();
+	        	           }
+	        	       });
+	        	AlertDialog alert = builder.create();
+	        	alert.show();
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }

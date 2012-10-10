@@ -1,7 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_add"
-        android:title="@string/menu_add_book"
-        android:showAsAction="never" />
+        android:title="@string/menu_add_book"/>
     <item android:id="@+id/menu_search"
         android:title="@string/menu_search_book"/>
+    <item android:id="@+id/menu_exit"
+        android:title="@string/menu_exit_app"/>
 </menu>

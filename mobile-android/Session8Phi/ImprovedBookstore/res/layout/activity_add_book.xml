@@ -81,13 +81,4 @@
         android:text="@string/btn_label_add_book"
         android:onClick="addBook" />
 
-    <Button
-        android:id="@+id/btn_cancel_add_book"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btn_confirm_add_book"
-        android:layout_toRightOf="@+id/btn_confirm_add_book"
-        android:text="@string/label_cancel"
-        android:onClick="cancelAddBook" />
-
 </RelativeLayout>
