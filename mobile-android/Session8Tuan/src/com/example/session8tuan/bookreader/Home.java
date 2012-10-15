@@ -181,7 +181,9 @@ ListView listV ;
 @Override
 public void onBackPressed() {
 	// TODO Auto-generated method stub
+	if(myPanel.getChildAt(0) instanceof ViewPager )
 	applySetting();
+	else super.onBackPressed() ;
 	//super.onBackPressed();
 }
   
