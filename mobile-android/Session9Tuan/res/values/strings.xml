@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">com.example.session9tuan</string>
+    <string name="title_section3">Process</string>
+    <string name="title_section2">AsyncTasks</string>
+    <string name="title_section1">Threads</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_book_store">BookStore</string>
+
+</resources>
