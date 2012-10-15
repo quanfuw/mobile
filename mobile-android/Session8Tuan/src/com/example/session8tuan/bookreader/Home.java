@@ -1,11 +1,17 @@
 package com.example.session8tuan.bookreader;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -13,12 +19,23 @@ import android.widget.RelativeLayout;
 
 public class Home extends Activity {
 
-  ListView listV ;
+  public static Context CONTEXT = null;
+  ListView list  ;
+  GridView grid ;
+  ViewPager  awesomePager ;
+  
+  RelativeLayout myPanel;
+  
+ListView listV ;
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home);
-
+    CONTEXT = this ;
+     list = new ListView(this) ;
+     grid = new GridView(this) ;
+      awesomePager = new ViewPager(this);
+      myPanel =  (RelativeLayout) findViewById(R.id.mainlayour);
     //applySetting() ;
   }
 
@@ -39,11 +56,54 @@ public class Home extends Activity {
 
     
 
-    ListView list = new ListView(this) ;
-    GridView grid = new GridView(this) ;
+    
+     
+    
+    grid.setOnItemClickListener(new OnItemClickListener() {
 
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			 System.out.println("\n\n add item listerner on grid ! ============");
+			 try {
+			 pageViewActivity adapter = new pageViewActivity() ;
+			 //ViewPager  awesomePager = (ViewPager) findViewById(R.id.awesomepager);
+			 
+			 	myPanel.removeView(grid) ;
+		        awesomePager.setAdapter(adapter);
+			 } catch (Exception e) {
+				 
+				e.printStackTrace() ;
+				return ;
+			}
+			
+		}
+    	
+	}) ;
+    
+    list.setOnItemClickListener(new OnItemClickListener() {
 
-    RelativeLayout myPanel =  (RelativeLayout) findViewById(R.id.mainlayour);
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			 System.out.println("\n\n add item listerner on grid ! ============");
+			 try {
+			 pageViewActivity adapter = new pageViewActivity() ;
+			 
+			 
+			 myPanel.removeView(list) ;
+		        awesomePager.setAdapter(adapter);
+			 } catch (Exception e) {
+				 
+				e.printStackTrace() ;
+				return ;
+			}
+			
+		}
+    	
+	}) ;
+    
+    //RelativeLayout myPanel =  (RelativeLayout) findViewById(R.id.mainlayour);
 
     if(!settings.getBoolean(Setting.SHOW_COVER, false)) {
 
@@ -54,7 +114,8 @@ public class Home extends Activity {
       myPanel.removeAllViews();
       // myPanel.removeView(grid);
       myPanel.addView(list) ;
-
+      awesomePager.setAdapter(null);
+      myPanel.addView(awesomePager) ;
       String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
           "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
           "Linux", "OS/2" };
@@ -82,13 +143,15 @@ public class Home extends Activity {
 
 
       myPanel.addView(grid) ;
-
+      awesomePager.setAdapter(null);
+      myPanel.addView(awesomePager) ;
 
 
       grid.setAdapter(new ImageAdapter(this)); 
+     // grid.addTo
     }
 
-
+    
 
 
   }
@@ -112,6 +175,19 @@ public class Home extends Activity {
     }
 
   }
+
+
+
+@Override
+public void onBackPressed() {
+	// TODO Auto-generated method stub
+	applySetting();
+	//super.onBackPressed();
+}
+  
+  
+  
+  
 
 
 

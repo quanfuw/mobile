@@ -17,6 +17,7 @@
 package com.example.session8tuan.bookreader;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -60,7 +61,23 @@ public class ImageAdapter extends BaseAdapter {
     } else {
       imageView = (ImageView) convertView;
     }
+    
+    /*
+     * 
+     
+    imageView.setOnClickListener(new View.OnClickListener()
+    {
 
+      @Override
+      public void onClick(View view) 
+      {
+    	   	 
+    	  System.out.println("\n\n ========== click to image !");
+      }
+      
+     });
+
+     */
     imageView.setImageResource(mThumbIds[position]);
     return imageView;
   }

@@ -5,6 +5,7 @@
     android:id="@+id/mainlayour"
      >
 
+    <!--
     <MediaController
         android:id="@+id/mediaController1"
         android:layout_width="wrap_content"
@@ -22,5 +23,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/myimate" android:contentDescription="TODO"/>
+    -->
+    
+    <android.support.v4.view.ViewPager
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" 
+    android:id="@+id/awesomepager"/>
 
 </RelativeLayout>
