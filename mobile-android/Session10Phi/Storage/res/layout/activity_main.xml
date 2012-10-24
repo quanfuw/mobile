@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/button_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Settings"
+        android:onClick="launchSettings" />
+
+    <Button
+        android:id="@+id/button_storage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_settings"
+        android:text="Storage"
+        android:onClick="launchStorage" />
+
+    <Button
+        android:id="@+id/button_reader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_storage"
+        android:text="Read"
+        android:onClick="launchReader" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_settings"
+        android:layout_toRightOf="@+id/button_settings"
+        android:text="Set some preferences"
+        android:textStyle="italic"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_storage"
+        android:layout_toRightOf="@+id/button_storage"
+        android:text="Store files"
+        android:textStyle="italic"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_reader"
+        android:layout_toRightOf="@+id/button_reader"
+        android:text="Read your files and settings"
+        android:textStyle="italic"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

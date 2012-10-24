@@ -1,0 +1,39 @@
+<resources>
+
+    <string name="app_name">Storage</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Storage</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string-array name="settings_entries">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+    </string-array>
+    <string-array name="settings_entries_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="list_settings">
+        <item>pref_chkbx</item>
+        <item>pref_chkbx_sub</item>
+        <item>pref_text</item>
+        <item>pref_text_sub</item>
+        <item>pref_list</item>
+        <item>pref_list_sub</item>
+    </string-array>
+    
+    <string-array name="list_downloads">
+        <item>Cloud</item>
+        <item>Benj</item>
+        <item>eXo</item>
+        <item>Moto</item>
+    </string-array>
+
+    <string name="title_activity_reader">Reader</string>
+    <string name="title_activity_storage">Storage</string>
+    <string name="title_activity_view_pic">Picture</string>
+
+</resources>
