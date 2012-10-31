@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="app_name">XML</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">XML</string>
+    <string name="title_activity_xml">Parse XML</string>
+    <string name="title_activity_json">JSONActivity</string>
+    
+    <string name="label_waiting_xml">Loading and parsing XML&#8230;</string>
+    <string name="label_waiting_json">Loading and parsing JSON&#8230;</string>
+    <string name="label_versions">Platform versions:</string>
+    <string name="label_history">History:</string>
+
+</resources>
