@@ -44,10 +44,12 @@ public class MainActivity extends Activity {
 		case R.id.cancel_music:
 			stopMusic();
 			break;
+		case R.id.button_video:
+			i = new Intent(this, VideoActivity.class);
+			startActivity(i);
 		default:
 			break;
 		}
-    	i=null;
     }
     
     private void playPauseMusic() {

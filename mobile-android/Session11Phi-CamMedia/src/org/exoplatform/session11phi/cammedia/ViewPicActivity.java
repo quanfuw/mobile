@@ -18,10 +18,9 @@ public class ViewPicActivity extends Activity {
         Intent intent = getIntent();
         byte[] data = intent.getByteArrayExtra(IMAGE);
         
-        ImageView imgView = (ImageView)findViewById(R.id.image_captured);
-        if (data != null)
+        if (data != null) {
+        	ImageView imgView = (ImageView)findViewById(R.id.image_captured);
         	imgView.setImageBitmap(BitmapFactory.decodeByteArray(data, 0, data.length));
-        else
-        	imgView.setContentDescription("Error.");
+        }
     }
 }

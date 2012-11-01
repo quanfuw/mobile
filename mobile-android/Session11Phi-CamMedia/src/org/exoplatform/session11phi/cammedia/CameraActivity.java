@@ -3,12 +3,12 @@ package org.exoplatform.session11phi.cammedia;
 import java.io.IOException;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Toast;
 
 public class CameraActivity extends Activity {
 
@@ -32,9 +32,7 @@ public class CameraActivity extends Activity {
 	Camera.PictureCallback pictureCallback = new Camera.PictureCallback() {
 		@Override
 		public void onPictureTaken(byte[] data, Camera cam) {
-			Intent i = new Intent(getApplicationContext(), ViewPicActivity.class);
-			i.putExtra(ViewPicActivity.IMAGE, data);
-			startActivity(i);
+			Toast.makeText(getBaseContext(), "Press back to return to the main activity.", Toast.LENGTH_SHORT).show();
 		}
 	};
 
@@ -51,10 +49,14 @@ public class CameraActivity extends Activity {
     }
 
 	@Override
+	protected void onDestroy() {
+		releaseCamera();
+		super.onDestroy();
+	}
+
+	@Override
 	protected void onPause() {
-		camera.stopPreview();
-		camera.release();
-		camera=null;
+		releaseCamera();
 		super.onPause();
 	}
 
@@ -115,5 +117,13 @@ public class CameraActivity extends Activity {
 	
 	public void capture(View v) {
 		camera.takePicture(null, null, pictureCallback);
+	}
+	
+	private void releaseCamera() {
+		if (camera != null) {
+			camera.stopPreview();
+			camera.release();
+			camera=null;
+		}
 	}
 }

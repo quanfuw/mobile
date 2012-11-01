@@ -8,7 +8,6 @@
         android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -35,11 +34,17 @@
         <activity
             android:name=".ViewPicActivity"
             android:label="@string/title_activity_view_pic" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.exoplatform.session11phi.cammedia.MainActivity" />
+        </activity>
+        
+        <activity 
+            android:name=".VideoActivity"
+            android:label="@string/title_activity_video">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.exoplatform.session11phi.cammedia.MainActivity" />
         </activity>
     </application>
 
