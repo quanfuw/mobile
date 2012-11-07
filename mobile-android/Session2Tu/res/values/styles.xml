@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+
+    <!-- our eXo custom theme -->
+    <style name="eXoTheme.Gray" parent="android:Theme.Light">
+      <item name="android:windowBackground">@color/gray</item>
+    </style>
+    
+</resources>

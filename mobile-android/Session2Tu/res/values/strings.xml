@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">eXo mobile</string>
+    <string name="hello_exo">Hello from eXo!</string>
+    <string name="say_hello">say hello</string>
+    <string name="menu_settings">Settings</string>
+    <string name="display_message">DisplayMessage</string>
+    
+</resources>
