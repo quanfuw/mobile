@@ -31,11 +31,13 @@ import android.widget.TextView;
  */
 public class DisplayMessageActivity extends Activity
 {  
+  private static final String TAG = "DisplayMessageActivity";
+  
   @Override
   public void onCreate(Bundle bundle)
   {
     super.onCreate(bundle);
-    
+    Log.i(TAG, "onCreate");
     LinearLayout layout = new LinearLayout(this);
     layout.setOrientation(LinearLayout.VERTICAL);
     TextView text = new TextView(this);
@@ -43,5 +45,26 @@ public class DisplayMessageActivity extends Activity
     text.setGravity(Gravity.CENTER_HORIZONTAL);  
     layout.addView(text);
     setContentView(layout);
+  }
+  
+  @Override
+  public void onResume()
+  {
+    super.onResume();
+    Log.i(TAG, "onResume");
+  }
+  
+  @Override
+  public void onPause()
+  {
+    super.onPause();
+    Log.i(TAG, "onPause");
+  }
+  
+  @Override 
+  public void onDestroy()
+  {
+    super.onDestroy();
+    Log.i(TAG, "onDestroy");
   }
 }
