@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">eXo mobile - Session3Tu</string>
+    <string name="editUsernameHint">your user name</string>
+    <string name="editPasswordHint">password</string>
+    <string name="connecteXo">connect to eXo</string>
+    <string name="home_activity">Home</string>
+    <string name="home_message">Hello user</string>
+</resources>
