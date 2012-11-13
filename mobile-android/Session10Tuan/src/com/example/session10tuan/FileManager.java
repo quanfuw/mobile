@@ -60,9 +60,9 @@ public class FileManager extends Activity implements android.content.DialogInter
                                        else {
 
                                          File sel = new File (currentFile.getPath() + "/" + chosenFile);
-                                         message("this file " + sel.isFile() + sel.getName() + "could not view detail") ;
-                                         if(!sel.isDirectory()) {
-                                           message("this file " + sel.getName() + "could not view detail") ;
+                                        
+                                         if(sel.isFile()) {
+                                           message("this file " + sel.getName() + "could not view detail").show() ;
                                          } else {
 
                                            if(sel != null) ;
@@ -132,7 +132,8 @@ public class FileManager extends Activity implements android.content.DialogInter
   }
 
   public void upLevel(View v) {
-    if (currentFile != null) {
+    //Limitation user to access to root folder !
+    if (currentFile != null && !currentFile.getPath().equalsIgnoreCase(Environment.getExternalStorageDirectory().getPath())) {
       currentFile = currentFile.getParentFile() ;
       initView();
     } else  {
