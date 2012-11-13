@@ -61,8 +61,8 @@ public class FileManager extends Activity implements android.content.DialogInter
 
                                          File sel = new File (currentFile.getPath() + "/" + chosenFile);
                                         
-                                         if(sel.isFile()) {
-                                           message("this file " + sel.getName() + "could not view detail").show() ;
+                                         if(sel.isFile() || !sel.canRead()) {
+                                           message("this file " + sel.getName() + " could not view detail").show() ;
                                          } else {
 
                                            if(sel != null) ;
