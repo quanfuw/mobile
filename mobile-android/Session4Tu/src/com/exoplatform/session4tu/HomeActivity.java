@@ -39,6 +39,7 @@ public class HomeActivity extends Activity
     
     Intent downloadIntent = new Intent();
     downloadIntent.setAction("com.exoplatform.intent.Download");
+    downloadIntent.putExtra("url", "http://www.google.com/index.html");
     startService(downloadIntent);
   }
   

@@ -18,6 +18,7 @@ package com.exoplatform.session4tu;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 /**
@@ -34,9 +35,60 @@ public class DownloadService extends IntentService
     super("DownloadService");
   }
   
+  /**
+   * handles the downloading task
+   * 
+   */
   @Override
   protected void onHandleIntent(Intent intent) {
     Log.i(TAG, "onHandleIntent - intent received: " + intent.getAction());
+    
+    String url = intent.getStringExtra("url");
+    Log.i(TAG, "url " + url);
+    Uri urlPath = Uri.parse(url);
+    String fileName = urlPath.getLastPathSegment();
+    Log.i(TAG, "filename " + fileName);
+    
+    File output = new File(Environment.getExternalStorageDirectory(),
+            fileName);
+    if (output.exists()) {
+      output.delete();
+    }
+    
+    InputStream stream = null;
+    FileOutputStream fos = null;
+    try {
+
+      URL url = new URL(urlPath);
+      stream = url.openConnection().getInputStream();
+      InputStreamReader reader = new InputStreamReader(stream);
+      fos = new FileOutputStream(output.getPath());
+      int next = -1;
+      while ((next = reader.read()) != -1) {
+        fos.write(next);
+      }
+      // Sucessful finished
+      result = Activity.RESULT_OK;
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (stream != null) {
+        try {
+          stream.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+      if (fos != null) {
+        try {
+          fos.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    
     
     Intent downloadBroadcast = new Intent();
     downloadBroadcast.setAction("com.exoplatform.intent.DownloadBroadcast");
