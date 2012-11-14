@@ -17,31 +17,79 @@
 package com.exoplatform.session4tu;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
+ * home screen allows to enter url of file to be downloaded
+ * 
  * @author Created by The eXo Platform SAS
  * <br/>Anh-Tu Nguyen
  * <br/><a href="mailto:tuna@exoplatform.com">tuna@exoplatform.com<a/>
  * Nov 13, 2012  
  */
 public class HomeActivity extends Activity
-{
-  private static final String TAG = "HomeActivity";
+{  
+  public static final String URL = "url";
+  
+  public static final String FILE_NAME = "downloadFile";
+  
+  public static final String SAVED_FILE = "downloadFile";
+
   
   @Override
   public void onCreate(Bundle bundle)
   {
     super.onCreate(bundle);
-    Log.i(TAG, "onCreate");
+    
+    IntentFilter filter = new IntentFilter();
+    filter.addAction("com.exoplatform.intent.DownloadBroadcast");
+    registerReceiver(downloadReceiver, filter);
+    setContentView(R.layout.home_activity);
+  }
+  
+  /**
+   * invoked when click on "start download" button
+   * @param view
+   */
+  public void onClickDownLoad(View view)
+  {
+    TextView downloadResult = (TextView) findViewById(R.id.downloadResult);
+    downloadResult.setText("downloading.. please wait");
+    downloadResult.setVisibility(View.VISIBLE);
     
     Intent downloadIntent = new Intent();
     downloadIntent.setAction("com.exoplatform.intent.Download");
-    downloadIntent.putExtra("url", "http://www.google.com/index.html");
+    EditText editUrl = (EditText) findViewById(R.id.editUrl);
+    downloadIntent.putExtra(URL, editUrl.getText().toString());
     startService(downloadIntent);
   }
   
+  /**
+   * broadcast receiver to catch the notification of download task
+   * 
+   */
+  public BroadcastReceiver downloadReceiver = new BroadcastReceiver() 
+  {    
+    @Override
+    public void onReceive(Context context, Intent intent) {
+      TextView downloadResult = (TextView) findViewById(R.id.downloadResult);
+      downloadResult.setText("download successfully from " + intent.getStringExtra(URL) 
+                             + " into file " + intent.getStringExtra(FILE_NAME));
+      downloadResult.setVisibility(View.VISIBLE);
+    }
+  };
   
+  @Override
+  public void onStop() 
+  {
+    super.onStop();
+    unregisterReceiver(downloadReceiver);
+  }
 }

@@ -16,22 +16,29 @@
  */
 package com.exoplatform.session4tu;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+
 import android.app.IntentService;
 import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
+import android.os.Environment;
 
 /**
-* @author Created by The eXo Platform SAS
+ * handles the downloading task
+ * 
+ * @author Created by The eXo Platform SAS
  * <br/>Anh-Tu Nguyen
  * <br/><a href="mailto:tuna@exoplatform.com">tuna@exoplatform.com<a/>
  * Nov 13, 2012  
  */
 public class DownloadService extends IntentService
-{
-  private static final String TAG = "DownloadService";
-
-  public DownloadService() {
+{    
+  public DownloadService() 
+  {
     super("DownloadService");
   }
   
@@ -40,39 +47,43 @@ public class DownloadService extends IntentService
    * 
    */
   @Override
-  protected void onHandleIntent(Intent intent) {
-    Log.i(TAG, "onHandleIntent - intent received: " + intent.getAction());
+  protected void onHandleIntent(Intent intent) 
+  {    
+    String urlPath = "http://www." + intent.getStringExtra(HomeActivity.URL);
     
-    String url = intent.getStringExtra("url");
-    Log.i(TAG, "url " + url);
-    Uri urlPath = Uri.parse(url);
-    String fileName = urlPath.getLastPathSegment();
-    Log.i(TAG, "filename " + fileName);
+    downloadFile(urlPath, HomeActivity.SAVED_FILE);
     
-    File output = new File(Environment.getExternalStorageDirectory(),
-            fileName);
-    if (output.exists()) {
-      output.delete();
-    }
-    
-    InputStream stream = null;
-    FileOutputStream fos = null;
-    try {
+    Intent downloadBroadcast = new Intent();
+    downloadBroadcast.setAction("com.exoplatform.intent.DownloadBroadcast");
+    downloadBroadcast.putExtra(HomeActivity.URL, urlPath);
+    downloadBroadcast.putExtra(HomeActivity.FILE_NAME, HomeActivity.SAVED_FILE);
+    /* sends the result back to HomeActivity using broadcast intent */
+    sendBroadcast(downloadBroadcast);
+  }
+  
+  private void downloadFile(String fromUrl, String saveToFile)
+  {
+    File output = new File(Environment.getExternalStorageDirectory(), saveToFile);
+    if (output.exists()) output.delete();
 
-      URL url = new URL(urlPath);
-      stream = url.openConnection().getInputStream();
-      InputStreamReader reader = new InputStreamReader(stream);
-      fos = new FileOutputStream(output.getPath());
-      int next = -1;
-      while ((next = reader.read()) != -1) {
-        fos.write(next);
-      }
-      // Sucessful finished
-      result = Activity.RESULT_OK;
-
-    } catch (Exception e) {
+    BufferedInputStream stream = null;
+    BufferedOutputStream fos = null;
+    try 
+    {
+      URL url = new URL(fromUrl);
+      stream = new BufferedInputStream( url.openStream() );
+      fos = new BufferedOutputStream(new FileOutputStream( output.getPath() ));
+                     
+      byte bdata[] = new byte[1024];
+      int count;
+      while ((count = stream.read(bdata)) != -1) 
+        /* read 1024 byte each time and write into output file */
+        fos.write(bdata, 0, count);
+    } 
+    catch (Exception e) {
       e.printStackTrace();
-    } finally {
+    } 
+    finally {
       if (stream != null) {
         try {
           stream.close();
@@ -88,12 +99,6 @@ public class DownloadService extends IntentService
         }
       }
     }
-    
-    
-    Intent downloadBroadcast = new Intent();
-    downloadBroadcast.setAction("com.exoplatform.intent.DownloadBroadcast");
-    Log.i(TAG, "broadcast intent");
-    sendBroadcast(downloadBroadcast);
   }
   
 }
