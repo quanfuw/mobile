@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Category">
+        <CheckBoxPreference android:title="Checkbox" android:key="pref_chkbx" android:summary="Select or unselect me" android:defaultValue="false"/>
+    	<EditTextPreference android:key="pref_text" android:title="Text" android:summary="Enter some value"/>
+    	<ListPreference android:key="pref_list" android:summary="Select one of the list" android:title="List" android:entryValues="@array/settings_entries_values" android:entries="@array/settings_entries"/>
+    </PreferenceCategory>
+    <PreferenceScreen android:title="Sub screen" android:key="pref_subscreen" android:summary="Opens a sub screen" android:persistent="false">
+		<EditTextPreference android:key="pref_text_sub" android:title="Text" android:summary="Enter some value"/>
+		<ListPreference android:key="pref_list_sub" android:summary="Select one of the list" android:title="List" android:entryValues="@array/settings_entries_values" android:entries="@array/settings_entries"/>
+		<CheckBoxPreference android:title="Checkbox" android:key="pref_chkbx_sub" android:summary="Select or unselect me" android:defaultValue="false"/>
+    </PreferenceScreen>
+</PreferenceScreen>
