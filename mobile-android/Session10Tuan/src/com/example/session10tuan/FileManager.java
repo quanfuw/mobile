@@ -34,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -75,15 +76,18 @@ public class FileManager extends Activity implements android.content.DialogInter
                                        else {
 
                                          File sel = new File (currentFile.getPath() + "/" + chosenFile);
-                                        
-                                         if(sel.isFile() || !sel.canRead()) {
+                                         if(sel.isFile()) {
+                                           if(!sel.canRead())
                                            message("this file " + sel.getName() + " could not view detail").show() ;
+                                           else  if("jpg/png/gif".contains(MimeTypeMap.getFileExtensionFromUrl(sel.getAbsolutePath()))) {
+                                             Intent viewer = new Intent(parent.getContext(), ViewPicActivity.class);
+                                             viewer.putExtra("FILE_NAME", sel.getAbsolutePath());
+                                             setIntent(viewer);
+                                           }
                                          } else {
 
                                            if(sel != null) ;
                                            currentFile = sel ;
-                                           System.out.println("reset current file === " + currentFile.getPath());
-                                           System.out.println("Seleted file " + sel.getPath());
                                            initView() ;
                                          }
                                        }
