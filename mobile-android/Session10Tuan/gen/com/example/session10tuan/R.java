@@ -39,7 +39,9 @@ public final class R {
         public static final int listView1=0x7f0a0001;
         public static final int menu_options=0x7f0a000b;
         public static final int menu_settings=0x7f0a000a;
+        public static final int open=0x7f0a000c;
         public static final int ratingBar1=0x7f0a0004;
+        public static final int share=0x7f0a000d;
         public static final int toggleButton1=0x7f0a0006;
     }
     public static final class layout {
@@ -50,6 +52,7 @@ public final class R {
     }
     public static final class menu {
         public static final int activity_file_manager=0x7f090000;
+        public static final int context_menu=0x7f090001;
     }
     public static final class string {
         public static final int app_name=0x7f060000;

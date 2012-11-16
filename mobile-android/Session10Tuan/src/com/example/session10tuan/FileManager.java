@@ -23,19 +23,24 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -59,13 +64,14 @@ public class FileManager extends Activity implements android.content.DialogInter
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_file_manager);
     files = (ListView) findViewById(R.id.listView1);
+    registerForContextMenu(files);
     String extState = Environment.getExternalStorageState();
 
     if(!extState.equals(Environment.MEDIA_MOUNTED)) {
       message.setText("The is NO media mounted !") ;
     }
     else {
-
+      /*
       files.setOnItemClickListener(
                                    new AdapterView.OnItemClickListener() {
                                      public void onItemClick(AdapterView parent, View view, int position, long id) {
@@ -93,9 +99,61 @@ public class FileManager extends Activity implements android.content.DialogInter
                                        }
                                      }
                                    });
-      if(currentFile != null) message.setText(currentFile.getPath()) ;
+       */
+      //if(currentFile != null) message.setText(currentFile.getPath()) ;
       initView() ;
     }
+  }
+  
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v,
+                                  ContextMenuInfo menuInfo) {
+      super.onCreateContextMenu(menu, v, menuInfo);
+      MenuInflater inflater = getMenuInflater();
+      inflater.inflate(R.menu.context_menu, menu);
+  }
+
+  
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+      AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    
+  String selectedWord = ((TextView) info.targetView).getText().toString();
+  long selectedWordId = info.id;
+  
+  //System.out.println("\n\n file " + selectedWord);
+  //System.out.println("\n\n id " + selectedWordId);
+  
+      switch (item.getItemId()) {
+          case R.id.open:
+              open(selectedWord, info.id);
+              return true;
+          case R.id.share:
+              share(selectedWord, info.id);
+              return true;
+          default:
+              return super.onContextItemSelected(item);
+      }
+  }
+  
+  private void open(String file, long id) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  private void share(String file, long id) {
+    Uri uri = Uri.parse("file://"+currentFile.getAbsolutePath() +"/" + file) ;
+        //Uri.fromFile(new File(Environment.getExternalStorageDirectory(), file)) ;
+    //System.out.println("file://"+currentFile.getAbsolutePath() +"/" + file);
+    Intent i = new Intent(Intent.ACTION_SEND);
+    //i.putExtra(Intent.EXTRA_CC, "tuanp@exoplatform.com");
+    i.putExtra(Intent.EXTRA_SUBJECT, "Title");
+    i.putExtra(Intent.EXTRA_TEXT, "Content");
+    i.putExtra(Intent.EXTRA_STREAM, uri);
+    i.setType("text/plain");
+   
+    startActivity(Intent.createChooser(i, "Send mail"));
+    
   }
 
   private void initView() {
