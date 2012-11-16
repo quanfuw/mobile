@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">eXo mobile - Session4Tu</string>
+    <string name="editUrlHint">url of image without http://www.</string>
+    <string name="download">start download</string>
+</resources>
