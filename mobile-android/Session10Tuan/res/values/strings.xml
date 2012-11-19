@@ -3,7 +3,28 @@
     <string name="app_name">com.example.session10tuan</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_options">Configuration</string>
     <string name="title_activity_file_manager">File Manager</string>
-    <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_setting">Setting</string>
+     <string name="title_activity_option">Option</string>
+     
+      <string-array name="settings_entries_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+      <string-array name="settings_entries">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+    </string-array>
+    
+      <string-array name="list_downloads">
+        <item>google</item>
+        <item>tumbr</item>
+        <item>eXo</item>
+        <item>vfossa</item>
+    </string-array>
 
 </resources>

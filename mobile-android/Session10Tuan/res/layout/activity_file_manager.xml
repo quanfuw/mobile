@@ -22,17 +22,6 @@
 
     </ListView>
 
-    <TextView
-        android:id="@+id/message1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_centerHorizontal="true"
-        android:padding="@dimen/padding_medium"
-        android:text="@string/hello_world"
-        tools:context=".FileManager" />
-
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -41,6 +30,16 @@
         android:layout_alignParentTop="true"
         android:text="up" 
         android:onClick="upLevel"
+        />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Cloud" 
+        android:onClick="download"
         />
 
 </RelativeLayout>
