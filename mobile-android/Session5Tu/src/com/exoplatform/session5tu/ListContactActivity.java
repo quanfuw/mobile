@@ -23,10 +23,12 @@ import com.exoplatform.session5tu.domain.Contact;
 
 import android.app.ListActivity;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,6 +43,8 @@ import android.widget.Toast;
  */
 public class ListContactActivity extends ListActivity
 {
+  private static final String TAG = "ListContactActivity";
+  
   @Override
   public void onCreate(Bundle savedInstance)
   {
@@ -59,23 +63,37 @@ public class ListContactActivity extends ListActivity
   private List<Contact> getContacts()
   {
     List<Contact> contactList = new ArrayList<Contact>();
-    Uri uri = ContactsContract.Contacts.CONTENT_URI;
     ContentResolver resolver = getContentResolver();
     
     /* sort contact in ascending ASCII order */
     String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-    Cursor cursor = resolver.query(uri, null, null, null, sortOrder);
+    Cursor cursor = resolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, sortOrder);
     
     if (cursor.getCount() > 0)
     {
       while (cursor.moveToNext())
       {
-        Contact aContact = new Contact( cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID)), 
-                                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+        String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+        Contact aContact = new Contact( contactId, cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                                        , getPhotoUri(contactId));
         contactList.add(aContact);
       }
     }
     cursor.close();
     return contactList;
+  }
+  
+  private Uri getPhotoUri(String contactId)
+  {
+    Cursor cursor = getContentResolver().query(ContactsContract.Data.CONTENT_URI, null
+                                               , ContactsContract.Data.CONTACT_ID + "=" + contactId + " AND "
+                                               + ContactsContract.Data.MIMETYPE + "='"
+                                               + ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE + "'", null, null);
+    if (cursor != null) { 
+      if (!cursor.moveToFirst()) return null;
+    } else return null;
+    Uri person = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, Long
+                                            .parseLong(contactId));
+    return Uri.withAppendedPath(person, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
   }
 }

@@ -16,6 +16,8 @@
  */
 package com.exoplatform.session5tu.domain;
 
+import android.net.Uri;
+
 /**
  * represents contact in android contact
  * 
@@ -28,15 +30,25 @@ public class Contact
 {
   private String id;
   private String name;
+  private Uri photoUri;
   
-  public Contact(String id, String name) 
+  public Contact(String id, String name, Uri uri) 
   {
     this.id = id;
     this.name = name;
+    this.setPhotoUri(uri);
   }
   
   public String getId() { return id; }
   public void setId(String id) { this.id = id; }
   public String getDisplayName() { return name; }
   public void setDisplayName(String name) { this.name = name; }
+
+  public Uri getPhotoUri() {
+    return photoUri;
+  }
+
+  public void setPhotoUri(Uri photoUri) {
+    this.photoUri = photoUri;
+  }
 }

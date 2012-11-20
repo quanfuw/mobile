@@ -4,17 +4,26 @@
   android:orientation="horizontal" 
   android:weightSum="1">
   
-  <TextView android:id="@+id/txtDisplayName" 
-    android:textAppearance="?android:attr/textAppearanceMedium" 
-    android:text="TextView" 
-    android:layout_height="wrap_content" 
-    android:layout_width="304dp">
+  <TextView 
+      android:id="@+id/txtDisplayName" 
+      android:textAppearance="?android:attr/textAppearanceMedium" 
+      android:text="TextView" 
+      android:layout_height="wrap_content" 
+      android:layout_width="244dp">
   </TextView>
-    
-  <TextView android:id="@+id/textView1"
-    android:textAppearance="?android:attr/textAppearanceLarge" 
-    android:text=">" 
-    android:layout_height="wrap_content" 
-    android:layout_width="wrap_content">
+  
+  <ImageView
+      android:id="@+id/contactPhoto"
+      android:layout_width="50dp"
+      android:layout_height="50dp" 
+      android:src="@drawable/exo_icon"
+      android:padding="4dp"/>
+  
+  <TextView 
+      android:id="@+id/textView1"
+      android:textAppearance="?android:attr/textAppearanceLarge" 
+      android:text=">" 
+      android:layout_height="wrap_content" 
+      android:layout_width="wrap_content">
   </TextView>
 </LinearLayout>

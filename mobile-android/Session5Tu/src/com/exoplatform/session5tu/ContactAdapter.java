@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -54,6 +55,7 @@ public class ContactAdapter extends ArrayAdapter<Contact>
   static class ViewHolder
   {
     protected TextView text = null;
+    protected ImageView image = null;
   }
   
   @Override 
@@ -72,11 +74,15 @@ public class ContactAdapter extends ArrayAdapter<Contact>
       convertView = inflater.inflate(R.layout.contact_list_item, null);
       viewHolder = new ViewHolder();
       viewHolder.text = (TextView) convertView.findViewById(R.id.txtDisplayName);
+      viewHolder.image = (ImageView) convertView.findViewById(R.id.contactPhoto);
       convertView.setTag(viewHolder); /* stores viewHolder */
     }
     else viewHolder = (ViewHolder) convertView.getTag();
     
     viewHolder.text.setText(getItem(position).getDisplayName());
+    if (getItem(position).getPhotoUri() != null)
+      viewHolder.image.setImageURI(getItem(position).getPhotoUri());
+    else viewHolder.image.setImageResource(R.drawable.exo_icon);
     return convertView;
   }
 }
