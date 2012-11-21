@@ -23,53 +23,134 @@ package com.example.session11tuan;
  * Nov 19, 2012  
  */
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-public class ReadingXML extends Activity {
-  private ArrayAdapter<String> adapter;
+public class ReadingXML extends ListActivity {
   private TextView textWaiting;
   private ProgressBar progressWaiting;
-  private String xml_url =  "http://repository.exoplatform.org/content/groups/public/org/exoplatform/calendar/calendar/maven-metadata.xml";
-  private WebView view ;
+  private String xml_url = "http://p-xr.com/xml";
+  public ArrayList<HashMap<String, String>> mylist;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.reading_xml);
-    view = (WebView)findViewById(R.id.webView1) ;
     textWaiting = (TextView)findViewById(R.id.content_xml);
     progressWaiting = (ProgressBar)findViewById(R.id.progress_waiting_xml);
     new ReadingTask().execute(xml_url);
+    mylist = new ArrayList<HashMap<String,String>>();
   }
 
+
+  public final static String getElementValue( Node elem ) {
+    Node kid;
+    if( elem != null){
+      if (elem.hasChildNodes()){
+        for( kid = elem.getFirstChild(); kid != null; kid = kid.getNextSibling() ){
+          if( kid.getNodeType() == Node.TEXT_NODE  ){
+            return kid.getNodeValue();
+          }
+        }
+      }
+    }
+    return "";
+  }
+
+  public static String getValue(Element item, String str) {   
+    NodeList n = item.getElementsByTagName(str);    
+    return getElementValue(n.item(0));
+  }
+
+  private int numResults(Document doc) {
+    Node results = doc.getDocumentElement();
+    int res = -1;
+
+    try{
+      res = Integer.valueOf(results.getAttributes().getNamedItem("count").getNodeValue());
+    }catch(Exception e ){
+      res = -1;
+    }
+
+    return res;
+  }
+
+
+  public static String getXML(String url){
+    String line = null;
+
+    try {
+      DefaultHttpClient httpClient = new DefaultHttpClient();
+      HttpPost httpPost = new HttpPost(url);
+      HttpResponse httpResponse = httpClient.execute(httpPost);
+      HttpEntity httpEntity = httpResponse.getEntity();
+      line = EntityUtils.toString(httpEntity);
+    } catch (UnsupportedEncodingException e) {
+      line = "<results status=\"error\"><msg>Can't connect to server</msg></results>";
+    } catch (MalformedURLException
+        e) {
+      line = "<results status=\"error\"><msg>Can't connect to server</msg></results>";
+    } catch (IOException e) {
+      line = "<results status=\"error\"><msg>Can't connect to server</msg></results>";
+    }
+    return line;
+  }
+
+  public Document XMLfromString(String xml){
+    Document doc = null;
+    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    try {
+      DocumentBuilder db = dbf.newDocumentBuilder();
+      InputSource is = new InputSource();
+      is.setCharacterStream(new StringReader(xml));
+      doc = db.parse(is);
+
+    } catch (ParserConfigurationException e) {
+      System.out.println("XML parse error: " + e.getMessage());
+      return null;
+    } catch (SAXException e) {
+      System.out.println("Wrong XML file structure: " + e.getMessage());
+      return null;
+    } catch (IOException e) {
+      System.out.println("I/O exeption: " + e.getMessage());
+      return null;
+    }
+    return doc;
+  }
 
 
 
@@ -83,41 +164,52 @@ public class ReadingXML extends Activity {
 
     @Override
     protected String doInBackground(String... urls) {
-      // TODO Auto-generated method stub
-      StringBuilder sb = new StringBuilder() ;
-      try {
-      URL url = new URL(urls[0]);
-      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-      conn.setReadTimeout(10000 /* milliseconds */);
-      conn.setConnectTimeout(15000 /* milliseconds */);
-      conn.setRequestMethod("GET");
-      conn.setDoInput(true);
-      // Starts the query
-      conn.connect();
-      InputStream stream = conn.getInputStream();    
-       
-      } catch (IOException e) {
-        // TODO: handle exception
-      }
-      
-       
-      //TODO convert to Document objec and list by tree;
-      
-      return sb.toString() ;
+
+
+
+      return getXML(urls[0]);
     }
 
     @Override
     protected void onPostExecute(String result) {
       if (result != null) {
-        textWaiting.setText("display xml");
+        Document doc = XMLfromString(result);
+        int numResults = numResults(doc);
+        if((numResults <= 0)){
+          Toast.makeText(ReadingXML.this, "Geen resultaten gevonden", Toast.LENGTH_LONG).show();
+          finish();
+        }
+        NodeList nodes = doc.getElementsByTagName("result");
+        for (int i = 0; i < nodes.getLength(); i++) {
+          HashMap<String,String> map = new HashMap<String,String>();  
+
+          Element e = (Element)nodes.item(i);
+          map.put("id", getValue(e, "id"));
+          map.put("name", "Naam:" + getValue(e, "name"));
+          map.put("Score", "Score: " +getValue(e, "score"));
+          mylist.add(map);
+
+        }
         progressWaiting.setVisibility(View.GONE);
-        view.loadData(result, "text/html", null);
+        textWaiting.setVisibility(View.GONE);
+        ListAdapter adapter = new SimpleAdapter(ReadingXML.this, mylist , R.layout.read_xml_view, 
+                                                new String[] { "name", "Score" }, 
+                                                new int[] { R.id.item_title, R.id.item_subtitle });
+
+        setListAdapter(adapter);
+
+        final ListView lv = getListView();
+        lv.setTextFilterEnabled(true);  
+        lv.setOnItemClickListener(new OnItemClickListener() {
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {            
+            @SuppressWarnings("unchecked")
+            HashMap<String, String> o = (HashMap<String, String>) lv.getItemAtPosition(position);             
+            Toast.makeText(ReadingXML.this, "ID '" + o.get("id") + "' was clicked.", Toast.LENGTH_LONG).show(); 
+
+          }
+        });
       }
     }
-
-
   }
-
-
 } 
 
