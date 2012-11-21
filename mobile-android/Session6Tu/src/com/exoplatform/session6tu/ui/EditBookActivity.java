@@ -16,12 +16,11 @@
  */
 package com.exoplatform.session6tu.ui;
 
-import com.exoplatform.session6tu.BookAdapter;
 import com.exoplatform.session6tu.R;
 import com.exoplatform.session6tu.datasource.BookDAO;
 import com.exoplatform.session6tu.domain.Book;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,42 +28,35 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * screen to list all books 
+ * represents the screen to edit book
  * 
  * @author Created by The eXo Platform SAS
  * <br/>Anh-Tu Nguyen
  * <br/><a href="mailto:tuna@exoplatform.com">tuna@exoplatform.com<a/>
  * <br/>Nov 20, 2012  
  */
-public class ListBookActivity extends ListActivity
+public class EditBookActivity extends Activity
 {
-  private static final String TAG = "ListBookActivity";
-  
-  public static final String BOOK_NAME = "bookName";
-  
-  public static final String BOOK_ID   = "bookId";
-  
-  private BookDAO mBookDAO;
+  private Book mBook;
   
   @Override
-  public void onCreate(Bundle savedInstance)
+  public void onCreate(Bundle savedState)
   {
-    super.onCreate(savedInstance);
-    mBookDAO = new BookDAO(this);
-    setListAdapter(new BookAdapter(this, mBookDAO.getAllBooks()));
+    super.onCreate(savedState);
     
-    /* if no book found, display a message */
-    if (mBookDAO.getAllBooks().size() == 0) {
-      Toast toast = Toast.makeText(this, "add a book first", Toast.LENGTH_SHORT);
-      toast.show();
-    }
+    setContentView(R.layout.edit_book);
+    
+    EditText updateBookName = (EditText) findViewById(R.id.updateBookName);
+    mBook = new Book( getIntent().getLongExtra(ListBookActivity.BOOK_ID, 0)
+                     , getIntent().getStringExtra(ListBookActivity.BOOK_NAME));
+    updateBookName.setText( mBook.getName() );
   }
   
-  /* override this method to display option menu */
+  
   @Override
   public boolean onCreateOptionsMenu(Menu menu)
   {
@@ -74,45 +66,45 @@ public class ListBookActivity extends ListActivity
     return true;
   }
   
-  /* handle user click on action menu */
   @Override
   public boolean onOptionsItemSelected(MenuItem menuItem)
   {
-    switch(menuItem.getItemId()) 
-    {
-      case android.R.id.home: /* user clicks on Home icon of action bar */ 
-        /* do not do anything since this is home already */ 
+    switch (menuItem.getItemId()) {
+      case android.R.id.home: /* return home */
+        Intent returnHome = new Intent();
+        /* set this flag to do not create new instance of parent activity if it exists */
+        returnHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        returnHome.setAction("com.exoplatform.intent.returnHome");
+        startActivity(returnHome);
         break;
-      case R.id.searchBook:
-        break;
-      case R.id.addBook:
+      case R.id.addBook: 
         Intent addBook = new Intent();
         addBook.setAction("com.exoplatform.intent.addBook");
+        addBook.putExtra(ListBookActivity.BOOK_NAME, mBook.getName());
+        addBook.putExtra(ListBookActivity.BOOK_ID, mBook.getId());
         startActivity(addBook);
-        break;
-      default: 
         break;
     }
     return true;
   }
   
-  @Override
-  public void onListItemClick(ListView listView, View view, int position, long id)
+  /**
+   * update the book into SQLite
+   * 
+   * */
+  public void updateBookClick(View view)
   {
-    super.onListItemClick(listView, view, position, id);
-    Object o = getListAdapter().getItem(position);
+    BookDAO bookDAO = new BookDAO(this);
+    EditText editBook = (EditText) findViewById(R.id.updateBookName);
+    mBook.setName( editBook.getText().toString() );
+    bookDAO.updateBook( mBook );
+    Toast toast = Toast.makeText(this, "successful", Toast.LENGTH_SHORT);
+    toast.show();
+    
     Intent showBookDetail = new Intent();
     showBookDetail.setAction("com.exoplatform.intent.showBookDetail");
-    showBookDetail.putExtra(BOOK_NAME, ((Book)o).getName() );
-    showBookDetail.putExtra(BOOK_ID, ((Book)o ).getId());
+    showBookDetail.putExtra(ListBookActivity.BOOK_NAME, mBook.getName() );
+    showBookDetail.putExtra(ListBookActivity.BOOK_ID, mBook.getId());
     startActivity(showBookDetail);
-  }
-  
-  @Override
-  public void onNewIntent(Intent intent)
-  {
-    Log.i(TAG, "receives intent: " + intent.getAction());
-    /* update ui with new list of books */
-    setListAdapter(new BookAdapter(this, mBookDAO.getAllBooks()));
   }
 }

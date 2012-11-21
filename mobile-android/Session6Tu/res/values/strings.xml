@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">eXo mobile - Session6Tu</string>
-    <string name="bookListTitle">Book List</string>
-    <string name="bookDetailTitle">Book Detail</string>
+    <string name="app_name">eXo mobile</string>
+    <string name="bookListTitle">list</string>
+    <string name="bookDetailTitle">detail</string>
+    <string name="addBookTitle">add</string>
+    <string name="editBookTitle">edit</string>
+    <string name="searchBook">search</string>
+    <string name="addBook">add</string>
+    <string name="editBook">edit</string>
+    <string name="editBookNameHint">name of book</string>
 </resources>

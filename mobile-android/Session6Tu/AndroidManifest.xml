@@ -3,10 +3,10 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15" />
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16" />
 
     <application android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo">
+        android:theme="@style/CustomTheme">
 
         <activity android:name=".ui.ListBookActivity"
             android:label="@string/app_name"
@@ -15,6 +15,10 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                 <category android:name="android.intent.category.DEFAULT" />
+                 <action android:name="com.exoplatform.intent.returnHome" />
             </intent-filter>
         </activity>
         
@@ -25,6 +29,24 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="com.exoplatform.intent.showBookDetail"/>
             </intent-filter>            
+        </activity>
+        
+        <activity android:name=".ui.AddBookActivity"
+            android:label="@string/addBookTitle"
+            android:parentActivityName=".ui.BookDetailActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.exoplatform.intent.addBook"/>
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".ui.EditBookActivity"
+            android:label="@string/editBookTitle"
+            android:parentActivityName=".ui.BookDetailActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.exoplatform.intent.editBook"/>
+            </intent-filter>
         </activity>
         
     </application>

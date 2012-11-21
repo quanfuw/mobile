@@ -17,6 +17,7 @@
 package com.exoplatform.session6tu.ui;
 
 import com.exoplatform.session6tu.R;
+import com.exoplatform.session6tu.datasource.BookDAO;
 import com.exoplatform.session6tu.domain.Book;
 
 import android.app.Activity;
@@ -26,32 +27,31 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
- * an activity to display book detail
+ * represents the screen to add book
  * 
  * @author Created by The eXo Platform SAS
  * <br/>Anh-Tu Nguyen
  * <br/><a href="mailto:tuna@exoplatform.com">tuna@exoplatform.com<a/>
- * <br/>Nov 20, 2012  
+ * <br/>Nov 21, 2012  
  */
-public class BookDetailActivity extends Activity
+public class AddBookActivity extends Activity
 {
-  private static final String TAG = "BookDetailActivity";
-  
+  private static final String TAG = "AddBookActivity";
   private Book mBook;
   
   @Override
   public void onCreate(Bundle savedState)
   {
     super.onCreate(savedState);
-    mBook = new Book(getIntent().getLongExtra(ListBookActivity.BOOK_ID, 0), 
-                     getIntent().getStringExtra(ListBookActivity.BOOK_NAME));
-    setContentView(R.layout.book_detail);
+    setContentView(R.layout.add_book);
     
-    TextView bookName = (TextView) findViewById(R.id.name);
-    bookName.setText(mBook.getName());
+    mBook = new Book( getIntent().getLongExtra(ListBookActivity.BOOK_ID, 0)
+                      , getIntent().getStringExtra(ListBookActivity.BOOK_NAME));
   }
   
   @Override
@@ -59,18 +59,16 @@ public class BookDetailActivity extends Activity
   {
     MenuInflater menuInflater = getMenuInflater();
     menuInflater.inflate(R.menu.menu, menu); /* inflate menu from xml file into menu of this activity */
-    menu.findItem(R.id.editBook).setEnabled(true); /* allow to edit book */
+    menu.findItem(R.id.editBook).setEnabled(false); /* do not allow to edit book */
+    menu.findItem(R.id.addBook).setEnabled(false);
     return true;
   }
-  
   
   @Override
   public boolean onOptionsItemSelected(MenuItem menuItem)
   {
-    Log.i(TAG, "click on action bar");
     switch (menuItem.getItemId()) {
       case android.R.id.home: /* return home */
-        Log.i(TAG, "returning home");
         Intent returnHome = new Intent();
         /* set this flag to do not create new instance of parent activity if it exists */
         returnHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -78,22 +76,45 @@ public class BookDetailActivity extends Activity
         startActivity(returnHome);
         break;
       case R.id.editBook: 
-        Log.i(TAG, "edit book");
         Intent editBook = new Intent();
-        editBook.setAction("com.exoplatform.intent.editBook");
+        editBook.setAction("com.exoplatform.intent.addBook");
         editBook.putExtra(ListBookActivity.BOOK_NAME, mBook.getName());
         editBook.putExtra(ListBookActivity.BOOK_ID, mBook.getId());
         startActivity(editBook);
         break;
-      case R.id.addBook: 
-        Log.i(TAG, "add book");
-        Intent addBook = new Intent();
-        addBook.setAction("com.exoplatform.intent.addBook");
-        addBook.putExtra(ListBookActivity.BOOK_NAME, mBook.getName());
-        addBook.putExtra(ListBookActivity.BOOK_ID, mBook.getId());
-        startActivity(addBook);
-        break;
     }
     return true;
+  }
+  
+  
+  /**
+   * save the book in to SQLite then display result in a toast
+   * return user to BookDetailActivity
+   * 
+   * @param view
+   */
+  public void saveBookClick(View saveButton)
+  {
+    BookDAO bookDAO = new BookDAO(this);
+    EditText editBook = (EditText) findViewById(R.id.editBookName);
+    Book newBook = bookDAO.insertBook( new Book( editBook.getText().toString() ));
+    Toast toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+    
+    if (newBook == null) 
+    {
+      /* error adding book */
+      toast.setText("add book error");
+      toast.show();
+      return;
+    }
+    
+    toast.setText("successful");
+    toast.show();
+    
+    Intent showBookDetail = new Intent();
+    showBookDetail.setAction("com.exoplatform.intent.showBookDetail");
+    showBookDetail.putExtra(ListBookActivity.BOOK_NAME, newBook.getName() );
+    showBookDetail.putExtra(ListBookActivity.BOOK_ID, newBook.getId());
+    startActivity(showBookDetail);
   }
 }

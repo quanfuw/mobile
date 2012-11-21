@@ -26,6 +26,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Book Data Access Object to manage operation to SQLite database
@@ -37,18 +38,22 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class BookDAO 
 {
-  private SQLiteDatabase database;
-  private BookSQLiteHelper dbHelper;
+  private static final String TAG = "BookDAO";
+  private SQLiteDatabase database = null;
+  private BookSQLiteHelper dbHelper = null;
   private String[] allColumns = { BookSQLiteHelper.COLUMN_ID, BookSQLiteHelper.COLUMN_BOOK_NAME };
   
   public BookDAO(Context context)
   {
+    if (dbHelper != null) return;
+    Log.i(TAG, "create new helper");
     dbHelper = new BookSQLiteHelper(context);
   }
   
   public void open() throws SQLException
   {
     /* calls onCreate and onUpgrade on dbHelper */
+    if (database != null) return;
     database = dbHelper.getWritableDatabase();
   }
   
@@ -58,23 +63,41 @@ public class BookDAO
    * insert book into database
    * 
    * @param aBook
-   * @return newBook with id
+   * @return newBook with id else -1 in case of error
    */
   public Book insertBook(Book aBook) {
+    open();
     ContentValues values = new ContentValues();
     values.put(BookSQLiteHelper.COLUMN_BOOK_NAME, aBook.getName());
     long bookId = database.insert(BookSQLiteHelper.BOOK_TABLE, null, values);
+    if (bookId == -1) return null;
     aBook.setId(bookId);
     return aBook;
   }
   
+  /**
+   * update book into database
+   * 
+   * @param aBook
+   * @return newBook with id else -1 in case of error
+   */
+  public void updateBook(Book aBook) {
+    open();
+    ContentValues values = new ContentValues();
+    values.put(BookSQLiteHelper.COLUMN_BOOK_NAME, aBook.getName());
+    database.update(BookSQLiteHelper.BOOK_TABLE, values, BookSQLiteHelper.COLUMN_ID + " = ?"
+                                  , new String[] { String.valueOf(aBook.getId()) } );
+  }
+  
   public void deleteBook(Book aBook) {
+    open();
     database.delete(BookSQLiteHelper.BOOK_TABLE, BookSQLiteHelper.COLUMN_ID
         + " = " + aBook.getId(), null);
   }
   
   public List<Book> getAllBooks() 
   {
+    open();
     List<Book> allBooks = new ArrayList<Book>();
     Cursor cursor = database.query(BookSQLiteHelper.BOOK_TABLE, allColumns, null, null, null, null, 
                                    BookSQLiteHelper.COLUMN_BOOK_NAME + " COLLATE LOCALIZED ASC");
@@ -86,6 +109,7 @@ public class BookDAO
     }
     // Make sure to close the cursor
     cursor.close();
+    Log.i(TAG, "number of books: " + allBooks.size());
     return allBooks;
   }
   
