@@ -9,7 +9,8 @@
       android:textAppearance="?android:attr/textAppearanceMedium" 
       android:text="TextView" 
       android:layout_height="wrap_content" 
-      android:layout_width="304dp">
+      android:layout_width="304dp"
+      android:padding="5dp">
   </TextView>
   
   <TextView 

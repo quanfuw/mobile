@@ -117,8 +117,16 @@ public class ListBookActivity extends ListActivity
   public void onNewIntent(Intent intent)
   {
     Log.i(TAG, "receives intent: " + intent.getAction());
-    /* update ui with new list of books */
-    mBookAdapter.setBooks( mBookDAO.getAllBooks() );
-    /* does ui update at this moment? */ 
+    /* uses a single BookAdapter */
+    mBookAdapter = new BookAdapter(this, mBookDAO.getAllBooks());
+    /* update ui with new list of books - have to set new adapter */
+    setListAdapter(mBookAdapter);
+  }
+  
+  @Override
+  public void onDestroy()
+  {
+	Log.i(TAG, "onDestroy");
+	super.onDestroy();
   }
 }

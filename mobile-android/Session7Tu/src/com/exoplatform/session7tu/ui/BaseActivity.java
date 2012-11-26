@@ -19,6 +19,7 @@ package com.exoplatform.session7tu.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,6 +38,8 @@ import com.exoplatform.session7tu.util.BookConstant;
  */
 public class BaseActivity extends Activity
 {
+  private static final String TAG = "BaseActivity";
+	
   protected Book mBook;
   
   @Override
@@ -71,7 +74,8 @@ public class BaseActivity extends Activity
       case android.R.id.home: /* return home */
         Intent returnHome = new Intent();
         /* set this flag to do not create new instance of parent activity if it exists */
-        returnHome.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        returnHome.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TOP);
         returnHome.setAction(BookConstant.RETURN_HOME_INTENT);
         startActivity(returnHome);
         break;
@@ -91,5 +95,12 @@ public class BaseActivity extends Activity
         break;
     }
     return true;
+  }
+  
+  @Override
+  public void onDestroy()
+  {
+	Log.i(TAG, "onDestroy");
+	super.onDestroy();
   }
 }
