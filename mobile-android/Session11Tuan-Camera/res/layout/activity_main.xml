@@ -17,17 +17,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="56dp"
+        android:layout_below="@+id/textView1"
         android:onClick="capture"
-        android:text="Take Snapshot" />
+        android:text="Capture" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="23dp"
         android:onClick="startCam"
-        android:text="Camera" />
+        android:text="playMusic" />
 
 </RelativeLayout>

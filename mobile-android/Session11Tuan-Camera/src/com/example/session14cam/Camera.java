@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.VideoView;
 
 public class Camera extends Activity  {
@@ -195,6 +196,8 @@ public class Camera extends Activity  {
     mVideoView.setVideoURI(mVideoUri);
     mImageBitmap = null;
     mVideoView.setVisibility(View.VISIBLE);
+    mVideoView.setMediaController(new MediaController(this)) ;
+    mVideoView.start();
     mImageView.setVisibility(View.INVISIBLE);
   }
 

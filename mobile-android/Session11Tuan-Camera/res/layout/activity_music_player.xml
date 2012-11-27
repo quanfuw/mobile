@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- note @android:id/list diffrences @+id/list -->
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="MP3 Player No Files"
+        tools:context=".MusicPlayer" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="false"
+        android:layout_below="@+id/forward"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/forward"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/empty"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/empty"
+        android:text="))" />
+
+    <TextView
+        android:id="@+id/play_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@android:id/list"
+        android:layout_centerHorizontal="true"
+        android:text="Musics"
+        tools:context="List" />
+
+    <Button
+        android:id="@+id/previous"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@android:id/list"
+        android:layout_toLeftOf="@+id/empty"
+        android:text="((" />
+
+    <ImageButton
+        android:id="@+id/pause"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@android:id/list"
+        android:layout_alignLeft="@+id/empty"
+        android:text="[]" />
+
+    <ImageButton
+        android:id="@+id/stop"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@android:id/list"
+        android:layout_toRightOf="@+id/pause"
+        android:text="||" />
+
+    <ImageButton
+        android:id="@+id/play"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@android:id/list"
+        android:layout_toRightOf="@+id/stop"
+        android:text="i>" />
+
+</RelativeLayout>

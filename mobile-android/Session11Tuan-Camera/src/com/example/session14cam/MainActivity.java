@@ -1,5 +1,6 @@
 package com.example.session14cam;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
@@ -27,7 +28,7 @@ public class MainActivity extends Activity {
     }
     
     public void startCam(View v) {
-      Intent record = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+      Intent record = new Intent(this, MusicPlayer.class);
       startActivity(record);
     }
 }
