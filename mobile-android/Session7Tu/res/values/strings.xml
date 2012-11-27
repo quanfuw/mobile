@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">eXo mobile</string>
+    <string name="bookListTitle">list</string>
+    <string name="bookDetailTitle">detail</string>
+    <string name="addBookTitle">add</string>
+    <string name="editBookTitle">edit</string>
+    <string name="searchBook">search</string>
+    <string name="addBook">add</string>
+    <string name="editBook">edit</string>
+    <string name="addBookNameHint">name of book</string>
+    
+    <!-- add book layout -->
+    <string name="addBookCoverHint">path to cover of book</string>
+</resources>
