@@ -1,0 +1,28 @@
+~~ @version $Revision: 144 $ ($Author: vlads $) $Date: 2007-06-01 14:35:37 -0400 (Fri, 01 Jun 2007) $
+~~ See this file format http://maven.apache.org/guides/mini/guide-apt-format.html
+
+                                    ------------------
+                                    Overview
+                                    ------------------
+
+
+midlet-example
+
+* Overview
+
+  The midlet-example project is {{{../pyx4me-maven-plugins/j2me-maven-plugin/}j2me-maven-plugin}} usage example.
+
+  Can be used as template for new j2me projects.
+
+
+* Try this MIDlet
+
+   {{{midlet-example.jad}midlet-example}}
+
+   Start MicroEmulator Web Start {{{http://pyx4j.com/snapshot/microemu/microemu-webstart/open/pyx4j.com/snapshot/pyx4me/midlet-example/midlet-example.jnlp}midlet-example}}
+
+* Download this projects sources
+
+   * {{{midlet-example-#version#-src.zip}midlet-example.zip}}
+
+   * {{{midlet-example-#version#-src.tar.gz}midlet-example.tar.gz}}
