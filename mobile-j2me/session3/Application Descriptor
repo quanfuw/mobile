@@ -1,0 +1,9 @@
+MIDlet-Jar-URL: Connections.jar
+CookieMIDlet-URL: http://www.google.com
+ImageLoader-URL: http://www.gravatar.com/avatar/ebd7c47952b3849005a078fe640816af.png
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 1.0.0
+PostMIDlet-URL: http://m.google.com
+MIDlet-Name: Connections MIDlet Suite
+MIDlet-Vendor: MIDlet Suite Vendor
+MicroEdition-Profile: MIDP-2.1
