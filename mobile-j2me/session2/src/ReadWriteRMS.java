@@ -1,7 +1,5 @@
-import javax.microedition.midlet.*;
-import javax.microedition.lcdui.*;
-import javax.microedition.io.*;
-import javax.microedition.rms.*;
+import javax.microedition.midlet.MIDlet;
+import javax.microedition.rms.RecordStore;
 
 public class ReadWriteRMS extends MIDlet{
   private RecordStore rs = null;
