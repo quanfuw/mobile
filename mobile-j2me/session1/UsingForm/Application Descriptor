@@ -1,7 +1,9 @@
+MIDlet-3: StationSignMIDlet,,item.StationSignMIDlet
+MIDlet-2: SimpleItemMIDlet,,item.SimpleItemMIDlet
 MIDlet-1: Lab1,,Lab1
 MIDlet-Jar-URL: UsingForm.jar
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 1.0.0
 MIDlet-Name: UsingForm MIDlet Suite
 MIDlet-Vendor: MIDlet Suite Vendor
-MIDlet-Version: 1.0.0
-MicroEdition-Configuration: CLDC-1.1
 MicroEdition-Profile: MIDP-2.1

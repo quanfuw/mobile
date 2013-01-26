@@ -1,5 +1,7 @@
 MIDlet-1: Lab1,,Lab1
-MIDlet-Jar-Size: 1487
+MIDlet-2: SimpleItemMIDlet,,item.SimpleItemMIDlet
+MIDlet-3: StationSignMIDlet,,item.StationSignMIDlet
+MIDlet-Jar-Size: 5738
 MIDlet-Jar-URL: UsingForm.jar
 MIDlet-Name: UsingForm MIDlet Suite
 MIDlet-Vendor: MIDlet Suite Vendor
