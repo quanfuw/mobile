@@ -1,0 +1,7 @@
+MIDlet-Jar-Size: 3020
+MIDlet-Jar-URL: Security.jar
+MIDlet-Name: Security MIDlet Suite
+MIDlet-Vendor: MIDlet Suite Vendor
+MIDlet-Version: 1.0.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.1
