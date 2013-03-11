@@ -1,6 +1,6 @@
-MIDlet-Jar-Size: 9716
-MIDlet-Jar-URL: Media.jar
-MIDlet-Name: Media MIDlet Suite
+MIDlet-Jar-Size: 253648
+MIDlet-Jar-URL: TouchCanvas.jar
+MIDlet-Name: TouchCanvas MIDlet Suite
 MIDlet-Vendor: MIDlet Suite Vendor
 MIDlet-Version: 1.0.0
 MicroEdition-Configuration: CLDC-1.1
