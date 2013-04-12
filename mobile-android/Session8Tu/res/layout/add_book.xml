@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" 
+  android:orientation="vertical" 
+  android:weightSum="1"
+  android:padding="10dp">
+   
+  <EditText 
+      android:id="@+id/addBookName"
+      android:hint="@string/addBookNameHint"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+  
+  <EditText 
+      android:id="@+id/addBookCoverUrl"
+      android:hint="@string/addBookCoverHint"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+  
+  <Button 
+      android:id="@+id/buttonAddBook"
+      android:text="@string/addBook"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:onClick="saveBookClick" />
+    
+</LinearLayout>
