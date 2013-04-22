@@ -1,0 +1,74 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.exoplatform.session9tu"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    
+    <application android:label="@string/app_name"
+        android:theme="@style/CustomTheme">
+
+        <activity android:name=".ui.ListBookActivity"
+            android:label="@string/app_name"
+            android:icon="@drawable/exo_icon"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                 <category android:name="android.intent.category.DEFAULT" />
+                 <action android:name="com.exoplatform.session9tu.intent.ReturnHome" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.BookDetailActivity"
+            android:label="@string/bookDetailTitle"
+            android:parentActivityName=".ui.ListBookActivity"
+            android:icon="@drawable/exo_icon"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.exoplatform.session9tu.intent.BookDetail"/>
+            </intent-filter>            
+        </activity>
+        
+        <activity android:name=".ui.AddBookActivity"
+            android:label="@string/addBookTitle"
+            android:parentActivityName=".ui.BookDetailActivity"
+            android:icon="@drawable/exo_icon"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.exoplatform.session9tu.intent.AddBook"/>
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="com.exoplatform.session9tu.ui.EditBookActivity"
+            android:label="@string/editBookTitle"
+            android:parentActivityName=".ui.BookDetailActivity"
+            android:icon="@drawable/exo_icon"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.exoplatform.session9tu.intent.EditBook"/>
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".ui.BookSettingActivity"
+            android:label="@string/bookSettings"
+            android:parentActivityName=".ui.BookDetailActivity"
+            android:icon="@drawable/exo_icon"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.exoplatform.session9tu.intent.BookSetting"/>
+            </intent-filter>
+        </activity>
+        
+    </application>
+
+</manifest>

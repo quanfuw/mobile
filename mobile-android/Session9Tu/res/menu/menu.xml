@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item 
+        android:id="@+id/searchBook"
+        android:title="@string/searchBook"
+        android:icon="@drawable/action_search"
+        android:showAsAction="always|collapseActionView"
+        android:actionViewClass="android.widget.SearchView" />
+    <item 
+        android:id="@+id/addBook"
+        android:title="@string/addBook"
+        android:icon="@drawable/action_add"
+        android:showAsAction="always" />
+    <item 
+        android:id="@+id/editBook"
+        android:title="@string/editBook"
+        android:icon="@drawable/action_edit"
+        android:showAsAction="always" />
+    <item
+        android:id="@+id/bookSettings"
+        android:title="@string/menu_settings"
+        android:icon="@drawable/action_settings"
+        android:showAsAction="always" />
+</menu>
