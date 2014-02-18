@@ -3,6 +3,7 @@ package com.example.gamebasic;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -63,5 +64,6 @@ public class MainGamePanel extends SurfaceView implements
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		
 	}
 }
