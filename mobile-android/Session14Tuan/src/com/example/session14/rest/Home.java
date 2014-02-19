@@ -40,8 +40,8 @@ public class Home extends Activity {
   public static String message ;
 
   private Dialog loginForm ;
-  private static String  PUBLIC_URL = "http://int.exoplatform.org/rest/platform/info";
-  private static String PRIVATE_URL = "http://int.exoplatform.org/rest/private/platform/info";
+  private static String  PUBLIC_URL = "http://plf-3.5.6-snapshot.acceptance2.exoplatform.org/rest/platform/info";
+  private static String PRIVATE_URL = "http://plf-3.5.6-snapshot.acceptance2.exoplatform.org/rest/private/platform/info";
 
 
 
@@ -75,7 +75,7 @@ public class Home extends Activity {
     StringBuilder builder = new StringBuilder();
     HttpClient client = new DefaultHttpClient();
     HttpGet httpGet = new HttpGet(url);
-    httpGet.setHeader("Authorization", "Basic " + Base64.encodeToString("tuanp:123456".getBytes(), Base64.NO_WRAP));
+    httpGet.setHeader("Authorization", "Basic " + Base64.encodeToString("root:gtn".getBytes(), Base64.NO_WRAP));
     try {
       HttpResponse response = client.execute(httpGet);
       StatusLine statusLine = response.getStatusLine();

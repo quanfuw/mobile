@@ -35,14 +35,7 @@
         android:layout_toRightOf="@+id/empty"
         android:text="))" />
 
-    <TextView
-        android:id="@+id/play_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@android:id/list"
-        android:layout_centerHorizontal="true"
-        android:text="Musics"
-        tools:context="List" />
+  
 
     <Button
         android:id="@+id/previous"

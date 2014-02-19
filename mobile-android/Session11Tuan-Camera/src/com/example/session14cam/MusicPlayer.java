@@ -37,7 +37,7 @@ public class MusicPlayer extends ListActivity {
     setContentView(R.layout.activity_music_player);
     updateSongList();
 
-
+/*
 
     mPlay=(ImageButton) findViewById(R.id.play);
     mPlay.setImageResource(R.drawable.play);
@@ -118,7 +118,7 @@ public class MusicPlayer extends ListActivity {
 
     });
 
-
+*/
     mstop = (ImageButton) findViewById(R.id.stop);
     mstop.setImageResource(R.drawable.stop);
     mstop.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +129,7 @@ public class MusicPlayer extends ListActivity {
           // mPlay.setImageResource(R.drawable.play);
           Toast.makeText(MusicPlayer.this, "***Stopped...........", Toast.LENGTH_LONG).show();
           mp.stop();
-          mp.release();
+         // mp.release();
 
         }
 
